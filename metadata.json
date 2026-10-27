@@ -1,0 +1,6 @@
+{
+  "name": "Claude Remotion Turbo Studio",
+  "description": "Next-generation Remotion Agent Skill with ultra-fast GPU rendering, cinematic physics, kinetic typography, and 1-click Claude Code / GitHub integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
