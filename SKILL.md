@@ -97,10 +97,11 @@ After generating code:
 2. Verify visual composition, legibility, and clipping.
 3. Execute Turbo render command with progress monitoring.
 
-### Law 13: Firebase Cloud Assets Integration
+### Law 13: Firebase Cloud Assets & FontAwesome Vector Icons
 Never hardcode mock local file paths for audio, video, or fonts that may be missing.
 - Read asset references from `assets/asset-catalog.json`.
 - Stream audio SFX (whooshes, sub-impacts), background music, and video overlays directly via Firebase Cloud Storage URLs.
+- Render sharp vector graphics using FontAwesome (`@fortawesome/react-fontawesome`) for brand logos (YouTube, TikTok, GitHub, X) and UI badges (Rocket, Bolt, Trophy, Fire) with Remotion spring dynamics.
 - For local offline rendering, sync assets via `npx tsx scripts/sync-firebase-assets.ts`.
 
 --------------------------------------------------------------------------------
@@ -133,6 +134,7 @@ npx remotion render src/index.ts Main out/video.mp4 \
 
 ## 3. Skill Reference Architecture
 Before writing complex components, consult the specialized reference docs:
+- `references/fontawesome-icons-in-remotion.md`: FontAwesome SVG vector animation, brands, and spring physics.
 - `references/firebase-assets-manager.md`: Firebase Storage integration, audio SFX, and cloud asset syncing.
 - `references/motion-physics-v2.md`: Precision spring formulas and timing charts.
 - `references/turbo-rendering-engine.md`: Chromium tuning, memory allocation, and GPU pipelines.

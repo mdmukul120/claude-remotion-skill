@@ -96,6 +96,15 @@
       "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/fonts%2FPlusJakartaSans-Bold.woff2?alt=media",
       "localPath": "assets/fonts/PlusJakartaSans-Bold.woff2",
       "description": "Ultra-crisp geometric modern sans display typeface for title tokens."
+    },
+    {
+      "id": "fontawesome-icon-pack",
+      "name": "FontAwesome 6 Vector Icon Pack (Brands & Solid)",
+      "category": "graphic",
+      "type": "package/svg-icons",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iconic-flare-2f4nj.firebasestorage.app/o/packages%2Ffontawesome-icons-remotion.json?alt=media",
+      "localPath": "assets/icons/fontawesome/",
+      "description": "Complete SVG vector icon suite for Remotion (YouTube, TikTok, GitHub, Rocket, Fire, Bolt, Trophy, Play, Star, etc.) with infinite sharpness."
     }
   ]
 }

@@ -860,6 +860,76 @@ export const VideoScene = () => {
 `
   },
   {
+    path: 'references/fontawesome-icons-in-remotion.md',
+    name: 'fontawesome-icons-in-remotion.md',
+    category: 'reference',
+    description: 'Complete guide for animating FontAwesome SVG icons with spring physics and kinetic styling in Remotion.',
+    language: 'markdown',
+    content: `# FontAwesome Vector Icon Pack Integration for Remotion Turbo
+
+This guide instructs Claude on integrating, choreographing, and animating **FontAwesome Icon Pack** vectors inside Remotion video compositions.
+
+--------------------------------------------------------------------------------
+
+## 1. Why FontAwesome for Programmatic Video?
+- **Zero Resolution Degradation**: Vectors render with infinite sharpness at 1080p, 4K, and 8K.
+- **Micro-Payload**: No heavy PNG/JPG downloads. Raw SVG paths render instantly without network latency.
+- **Dynamic CSS & SVG Physics**: Direct control over \`fill\`, \`stroke\`, \`filter drop-shadow\`, \`transform: scale()\`, and \`rotate()\`.
+
+--------------------------------------------------------------------------------
+
+## 2. Installation & Imports
+
+\`\`\`bash
+npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons @fortawesome/free-brands-svg-icons
+\`\`\`
+
+In Remotion components:
+
+\`\`\`tsx
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRocket, faFire, faBolt, faStar, faTrophy, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faYoutube, faTiktok, faInstagram, faGithub, faDiscord } from "@fortawesome/free-brands-svg-icons";
+\`\`\`
+
+--------------------------------------------------------------------------------
+
+## 3. Spring Elastic Icon Pop Recipe
+
+\`\`\`tsx
+import { spring, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRocket } from "@fortawesome/free-solid-svg-icons";
+
+export const AnimatedRocketBadge = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const pop = spring({
+    frame,
+    fps,
+    config: { damping: 10, mass: 0.6, stiffness: 220, overshootClamping: false },
+  });
+
+  const scale = interpolate(pop, [0, 1], [0, 1]);
+  const rotate = interpolate(pop, [0, 1], [-45, 0]);
+
+  return (
+    <div
+      style={{
+        transform: \`scale(\${scale}) rotate(\${rotate}deg)\`,
+        opacity: Math.min(1, pop),
+      }}
+      className="w-16 h-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shadow-lg drop-shadow-[0_0_20px_rgba(99,102,241,0.6)]"
+    >
+      <FontAwesomeIcon icon={faRocket} className="text-2xl" />
+    </div>
+  );
+};
+\`\`\`
+`
+  },
+  {
     path: 'scripts/sync-firebase-assets.ts',
     name: 'sync-firebase-assets.ts',
     category: 'script',

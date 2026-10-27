@@ -15,11 +15,13 @@ import {
   Sparkles,
   Layers,
   Database,
-  CloudCheck
+  CloudCheck,
+  Star
 } from 'lucide-react';
 import { triggerDownload } from '../utils/zipExporter';
 import { db, projectId, storageBucket } from '../lib/firebase';
 import { collection, onSnapshot, doc, setDoc, getDocs } from 'firebase/firestore';
+import { FontAwesomeIconBrowser } from './FontAwesomeIconBrowser';
 
 export interface AssetRecord {
   id: string;
@@ -113,6 +115,7 @@ interface FirebaseAssetManagerProps {
 }
 
 export const FirebaseAssetManager: React.FC<FirebaseAssetManagerProps> = ({ lang }) => {
+  const [activeSubTab, setActiveSubTab] = useState<'cloud' | 'fontawesome'>('cloud');
   const [assets, setAssets] = useState<AssetRecord[]>(INITIAL_ASSETS);
   const [filter, setFilter] = useState<string>('all');
   const [showAddModal, setShowAddModal] = useState<boolean>(false);
@@ -313,48 +316,88 @@ font.load().then(f => document.fonts.add(f));`;
   };
 
   return (
-    <div className="bg-slate-900/60 border border-slate-800 rounded-xl overflow-hidden shadow-2xl flex flex-col">
-      {/* Header */}
-      <div className="px-6 py-4 border-b border-slate-800 bg-slate-950/80 flex items-center justify-between gap-4 flex-wrap">
-        <div>
-          <div className="flex items-center gap-2 mb-0.5">
-            <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
-              <Flame className="w-4 h-4 text-amber-500 fill-amber-500/20" />
-              {lang === 'bn'
-                ? 'ফায়ারবেস ক্লাউড অ্যাসেট ম্যানেজার'
-                : 'Firebase Cloud Asset Catalog'}
-            </h3>
-            <span className="text-[10px] font-mono font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>{projectId} · Firestore Live</span>
-            </span>
-          </div>
-          <p className="text-xs text-slate-400">
-            {lang === 'bn'
-              ? 'ফায়ারবেস স্টোরেজ ও ফায়ারস্টোর থেকে অডিও SFX, মিউজিক ও ভিডিও ওভারলে সিঙ্ক করুন যা Claude সরাসরি রিমোশনে ব্যবহার করবে'
-              : 'Synced with live Firebase Firestore & Storage. Claude uses these cloud assets directly in Remotion'}
-          </p>
+    <div className="flex flex-col gap-6">
+      {/* Top Level Sub-Nav Switcher */}
+      <div className="flex items-center justify-between border-b border-slate-800 pb-3 flex-wrap gap-4">
+        <div className="flex items-center gap-2 bg-slate-900 p-1 rounded-xl border border-slate-800">
+          <button
+            onClick={() => setActiveSubTab('cloud')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              activeSubTab === 'cloud'
+                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-sm'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Flame className="w-4 h-4 text-amber-500" />
+            <span>{lang === 'bn' ? 'ফায়ারবেস ক্লাউড অ্যাসেটস (SFX / মিউজিক / ভিডিও)' : 'Firebase Cloud Assets (Audio & Video)'}</span>
+          </button>
+
+          <button
+            onClick={() => setActiveSubTab('fontawesome')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+              activeSubTab === 'fontawesome'
+                ? 'bg-indigo-600 text-white shadow-sm'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Star className="w-4 h-4 text-amber-300 fill-amber-300" />
+            <span>{lang === 'bn' ? 'ফন্টঅসাম ভেক্টর আইকন প্যাক (FontAwesome v6)' : 'FontAwesome Vector Icon Pack'}</span>
+            <span className="text-[10px] bg-indigo-950/80 text-indigo-300 px-1.5 py-0.2 rounded border border-indigo-400/30">60+</span>
+          </button>
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition-colors cursor-pointer"
-          >
-            <Plus className="w-3.5 h-3.5" />
-            <span>{lang === 'bn' ? 'নতুন অ্যাসেট যোগ করুন' : 'Add Firebase Asset'}</span>
-          </button>
-
-          <button
-            onClick={handleExportCatalog}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition-colors cursor-pointer"
-            title="Download updated asset-catalog.json"
-          >
-            <Download className="w-3.5 h-3.5" />
-            <span>{lang === 'bn' ? 'ক্যাটালগ ডাউনলোড' : 'Export Catalog'}</span>
-          </button>
+        <div className="text-xs text-slate-400 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-400" />
+          <span>{lang === 'bn' ? 'Claude অটো-এক্টিভেটেড' : 'Claude Auto-Activated'}</span>
         </div>
       </div>
+
+      {/* FontAwesome Tab View */}
+      {activeSubTab === 'fontawesome' ? (
+        <FontAwesomeIconBrowser lang={lang} />
+      ) : (
+        <div className="bg-slate-900/60 border border-slate-800 rounded-xl overflow-hidden shadow-2xl flex flex-col">
+          {/* Header */}
+          <div className="px-6 py-4 border-b border-slate-800 bg-slate-950/80 flex items-center justify-between gap-4 flex-wrap">
+            <div>
+              <div className="flex items-center gap-2 mb-0.5">
+                <h3 className="text-base font-bold text-slate-100 flex items-center gap-2">
+                  <Flame className="w-4 h-4 text-amber-500 fill-amber-500/20" />
+                  {lang === 'bn'
+                    ? 'ফায়ারবেস ক্লাউড অ্যাসেট ম্যানেজার'
+                    : 'Firebase Cloud Asset Catalog'}
+                </h3>
+                <span className="text-[10px] font-mono font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>{projectId} · Firestore Live</span>
+                </span>
+              </div>
+              <p className="text-xs text-slate-400">
+                {lang === 'bn'
+                  ? 'ফায়ারবেস স্টোরেজ ও ফায়ারস্টোর থেকে অডিও SFX, মিউজিক ও ভিডিও ওভারলে সিঙ্ক করুন যা Claude সরাসরি রিমোশনে ব্যবহার করবে'
+                  : 'Synced with live Firebase Firestore & Storage. Claude uses these cloud assets directly in Remotion'}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowAddModal(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-sm transition-colors cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>{lang === 'bn' ? 'নতুন অ্যাসেট যোগ করুন' : 'Add Firebase Asset'}</span>
+              </button>
+
+              <button
+                onClick={handleExportCatalog}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition-colors cursor-pointer"
+                title="Download updated asset-catalog.json"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>{lang === 'bn' ? 'ক্যাটালগ ডাউনলোড' : 'Export Catalog'}</span>
+              </button>
+            </div>
+          </div>
 
       {/* Filter Tabs */}
       <div className="px-6 py-3 border-b border-slate-800/80 bg-slate-950/50 flex items-center justify-between gap-4 flex-wrap">
@@ -591,6 +634,8 @@ font.load().then(f => document.fonts.add(f));`;
               </div>
             </form>
           </div>
+        </div>
+      )}
         </div>
       )}
     </div>
