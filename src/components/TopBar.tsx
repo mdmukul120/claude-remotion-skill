@@ -31,9 +31,10 @@ export const TopBar: React.FC<TopBarProps> = ({
 
   const navLinks = [
     { id: 'preview', label: lang === 'bn' ? 'লাইভ স্টুডিও' : 'Live Studio' },
+    { id: 'assets', label: lang === 'bn' ? 'ফায়ারবেস অ্যাসেট' : 'Firebase Assets' },
+    { id: 'vercel', label: lang === 'bn' ? 'Vercel ডিপ্লয়' : 'Vercel Deploy' },
     { id: 'files', label: lang === 'bn' ? 'স্কিল ফাইলসমূহ' : 'Skill Files' },
     { id: 'benchmark', label: lang === 'bn' ? 'টার্বো স্পিড' : 'Turbo Speed' },
-    { id: 'templates', label: lang === 'bn' ? 'টেমপ্লেট' : 'Templates' },
     { id: 'github', label: lang === 'bn' ? 'গিটহাব ইনস্টল' : 'GitHub Install' },
   ];
 

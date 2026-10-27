@@ -97,6 +97,12 @@ After generating code:
 2. Verify visual composition, legibility, and clipping.
 3. Execute Turbo render command with progress monitoring.
 
+### Law 13: Firebase Cloud Assets Integration
+Never hardcode mock local file paths for audio, video, or fonts that may be missing.
+- Read asset references from `assets/asset-catalog.json`.
+- Stream audio SFX (whooshes, sub-impacts), background music, and video overlays directly via Firebase Cloud Storage URLs.
+- For local offline rendering, sync assets via `npx tsx scripts/sync-firebase-assets.ts`.
+
 --------------------------------------------------------------------------------
 
 ## 2. Turbo Render CLI Commands
@@ -107,10 +113,13 @@ Run these optimized commands for maximum rendering throughput:
 # 1. Preview dev server with hot reload
 npm run dev
 
-# 2. Ultra-Fast Multi-Core GPU Render (4.8x speed)
+# 2. Sync cloud assets from Firebase
+npx tsx scripts/sync-firebase-assets.ts
+
+# 3. Ultra-Fast Multi-Core GPU Render (4.8x speed)
 npx tsx scripts/render-turbo.ts --composition=Main --output=out/video.mp4 --concurrency=8
 
-# 3. Direct Remotion Turbo CLI (single line)
+# 4. Direct Remotion Turbo CLI (single line)
 npx remotion render src/index.ts Main out/video.mp4 \
   --concurrency=8 \
   --gl=angle \
@@ -124,8 +133,18 @@ npx remotion render src/index.ts Main out/video.mp4 \
 
 ## 3. Skill Reference Architecture
 Before writing complex components, consult the specialized reference docs:
+- `references/firebase-assets-manager.md`: Firebase Storage integration, audio SFX, and cloud asset syncing.
 - `references/motion-physics-v2.md`: Precision spring formulas and timing charts.
 - `references/turbo-rendering-engine.md`: Chromium tuning, memory allocation, and GPU pipelines.
 - `references/cinematic-color-and-lighting.md`: Color grading matrices, grain, and lighting shaders.
 - `references/kinetic-typography-and-sfx.md`: Dynamic word captions and audio-visual synching.
 - `references/multi-aspect-composition.md`: Aspect ratio adaptation for Reels, TikTok, and YouTube.
+
+--------------------------------------------------------------------------------
+
+## 4. Vercel Deployment Architecture
+The entire web preview studio, asset manager, and skill generator is configured for zero-config deployment on Vercel:
+- `vercel.json`: Handles SPA rewrites (`/(.*) -> /index.html`) and asset caching.
+- Build command: `npm run build`
+- Output directory: `dist`
+

@@ -1,0 +1,101 @@
+{
+  "version": "2.0.0",
+  "firebaseConfig": {
+    "projectId": "iconic-flare-2f4nj",
+    "storageBucket": "iconic-flare-2f4nj.firebasestorage.app",
+    "firestoreCollection": "remotion_assets"
+  },
+  "assets": [
+    {
+      "id": "sfx-woosh-fast",
+      "name": "Cinematic Whoosh Transition",
+      "category": "sfx",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/sfx%2Fwhoosh-fast.mp3?alt=media",
+      "localPath": "assets/sfx/whoosh-fast.mp3",
+      "durationFrames": 24,
+      "description": "High-speed air whoosh for card flips, camera whip pans, and kinetic text reveals."
+    },
+    {
+      "id": "sfx-cinematic-impact",
+      "name": "Heavy Sub Bass Impact",
+      "category": "sfx",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/sfx%2Fsub-impact.mp3?alt=media",
+      "localPath": "assets/sfx/sub-impact.mp3",
+      "durationFrames": 45,
+      "description": "Low-frequency dramatic slam for logo stingers and headline drops."
+    },
+    {
+      "id": "sfx-digital-click",
+      "name": "Tactile UI Mechanical Click",
+      "category": "sfx",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/sfx%2Fdigital-click.mp3?alt=media",
+      "localPath": "assets/sfx/digital-click.mp3",
+      "durationFrames": 12,
+      "description": "Sharp tactile pop for numeric counters, button highlights, and staggered badges."
+    },
+    {
+      "id": "sfx-riser-build",
+      "name": "Tension Riser Build-Up",
+      "category": "sfx",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/sfx%2Friser-build.mp3?alt=media",
+      "localPath": "assets/sfx/riser-build.mp3",
+      "durationFrames": 90,
+      "description": "Rising synth tension leading directly into beat drops or hook transitions."
+    },
+    {
+      "id": "bgm-tech-minimal",
+      "name": "Modern Silicon Tech Beat (124 BPM)",
+      "category": "music",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/music%2Ftech-minimal.mp3?alt=media",
+      "localPath": "assets/music/tech-minimal.mp3",
+      "durationFrames": 900,
+      "bpm": 124,
+      "description": "Punchy minimalist electronic beat ideal for SaaS product launches and developer tools."
+    },
+    {
+      "id": "bgm-cyberpunk-drive",
+      "name": "Neo-Tokyo Synthwave Pulse (128 BPM)",
+      "category": "music",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/music%2Fcyberpunk-drive.mp3?alt=media",
+      "localPath": "assets/music/cyberpunk-drive.mp3",
+      "durationFrames": 1080,
+      "bpm": 128,
+      "description": "Aggressive analog synth bassline for high-energy tech trailers and glitch reels."
+    },
+    {
+      "id": "overlay-dust-particles",
+      "name": "Cinematic Floating Dust Particles",
+      "category": "overlay",
+      "type": "video/mp4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/overlays%2Fdust-particles.mp4?alt=media",
+      "localPath": "assets/overlays/dust-particles.mp4",
+      "durationFrames": 300,
+      "description": "Slow organic bokeh dust float for cinematic luxury and depth layering."
+    },
+    {
+      "id": "overlay-light-leak",
+      "name": "Warm Anamorphic Light Leak",
+      "category": "overlay",
+      "type": "video/mp4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/overlays%2Flight-leak.mp4?alt=media",
+      "localPath": "assets/overlays/light-leak.mp4",
+      "durationFrames": 180,
+      "description": "Golden horizontal lens flare sweep for scene transitions."
+    },
+    {
+      "id": "font-plus-jakarta",
+      "name": "Plus Jakarta Sans Bold Font",
+      "category": "font",
+      "type": "font/woff2",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/fonts%2FPlusJakartaSans-Bold.woff2?alt=media",
+      "localPath": "assets/fonts/PlusJakartaSans-Bold.woff2",
+      "description": "Ultra-crisp geometric modern sans display typeface for title tokens."
+    }
+  ]
+}

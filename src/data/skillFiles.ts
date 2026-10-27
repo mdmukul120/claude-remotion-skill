@@ -741,8 +741,11 @@ Copy the entire contents of \`SKILL.md\` into your Claude Project instructions o
 
 ## 🛠️ Included Turbo Scripts & Configs
 
-- \`SKILL.md\`: Core agent constitution & 12 Golden Laws.
+- \`SKILL.md\`: Core agent constitution & 13 Golden Laws.
+- \`vercel.json\`: Vercel SPA routing and asset cache configuration.
+- \`assets/asset-catalog.json\`: Firebase Storage asset registry (SFX, Music, Overlays, Fonts).
 - \`scripts/render-turbo.ts\`: GPU-accelerated multi-thread render CLI.
+- \`scripts/sync-firebase-assets.ts\`: Firebase cloud asset synchronizer.
 - \`remotion.config.ts\`: Optimal Chromium flags & zero-copy memory buffers.
 - \`references/\`: Complete formulas for motion physics, LUT grading, typography, and aspect ratios.
 
@@ -750,6 +753,125 @@ Copy the entire contents of \`SKILL.md\` into your Claude Project instructions o
 
 ## 📜 License
 MIT License. Built for the developer community.
+`
+  },
+  {
+    path: 'vercel.json',
+    name: 'vercel.json',
+    category: 'config',
+    description: 'Vercel deployment configuration with SPA routing and asset cache rules.',
+    language: 'json',
+    content: `{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}`
+  },
+  {
+    path: 'assets/asset-catalog.json',
+    name: 'asset-catalog.json',
+    category: 'config',
+    description: 'Firebase Cloud Storage asset registry for SFX, BGM, Overlays, and Fonts.',
+    language: 'json',
+    content: `{
+  "version": "2.0.0",
+  "firebaseConfig": {
+    "storageBucket": "claude-remotion-turbo.appspot.com",
+    "firestoreCollection": "remotion_assets"
+  },
+  "assets": [
+    {
+      "id": "sfx-woosh-fast",
+      "name": "Cinematic Whoosh Transition",
+      "category": "sfx",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/sfx%2Fwhoosh-fast.mp3?alt=media",
+      "localPath": "assets/sfx/whoosh-fast.mp3",
+      "durationFrames": 24
+    },
+    {
+      "id": "sfx-cinematic-impact",
+      "name": "Heavy Sub Bass Impact",
+      "category": "sfx",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/sfx%2Fsub-impact.mp3?alt=media",
+      "localPath": "assets/sfx/sub-impact.mp3",
+      "durationFrames": 45
+    },
+    {
+      "id": "bgm-tech-minimal",
+      "name": "Modern Silicon Tech Beat (124 BPM)",
+      "category": "music",
+      "type": "audio/mp3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/music%2Ftech-minimal.mp3?alt=media",
+      "localPath": "assets/music/tech-minimal.mp3",
+      "durationFrames": 900,
+      "bpm": 124
+    },
+    {
+      "id": "overlay-dust-particles",
+      "name": "Cinematic Floating Dust Particles",
+      "category": "overlay",
+      "type": "video/mp4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/claude-remotion-turbo.appspot.com/o/overlays%2Fdust-particles.mp4?alt=media",
+      "localPath": "assets/overlays/dust-particles.mp4",
+      "durationFrames": 300
+    }
+  ]
+}`
+  },
+  {
+    path: 'references/firebase-assets-manager.md',
+    name: 'firebase-assets-manager.md',
+    category: 'reference',
+    description: 'Guide for streaming and caching Firebase Storage audio, video, and font assets in Remotion.',
+    language: 'markdown',
+    content: `# Firebase Cloud Assets Integration for Remotion Turbo
+
+This guide details how Claude loads, streams, and caches production assets (Audio SFX, Background Music, Video Overlays, Fonts, and LUTs) stored in Firebase Storage directly inside Remotion compositions.
+
+--------------------------------------------------------------------------------
+
+## 1. Firebase Asset Storage Architecture
+Assets are stored in Firebase Cloud Storage and indexed in \`assets/asset-catalog.json\`:
+- **Audio / SFX**: Fast whooshes, sub-bass impacts, UI tactile clicks, tension risers.
+- **Background Music**: Beat-matched tracks with known BPM (124, 128, 140 BPM).
+- **Video Overlays**: Film grain, floating dust particles, light leaks, glitch overlays.
+
+--------------------------------------------------------------------------------
+
+## 2. Using Firebase Assets in Remotion Components
+\`\`\`tsx
+import { Audio } from "remotion";
+import catalog from "../assets/asset-catalog.json";
+
+export const VideoScene = () => {
+  const whooshSfx = catalog.assets.find((a) => a.id === "sfx-woosh-fast");
+  return whooshSfx ? <Audio src={whooshSfx.url} volume={0.8} /> : null;
+};
+\`\`\`
+`
+  },
+  {
+    path: 'scripts/sync-firebase-assets.ts',
+    name: 'sync-firebase-assets.ts',
+    category: 'script',
+    description: 'CLI tool to download Firebase Storage assets locally for offline rendering.',
+    language: 'typescript',
+    content: `// Firebase Assets Downloader & Synchronizer for Remotion Turbo
+import fs from "fs";
+import path from "path";
+import https from "https";
+
+const CATALOG_PATH = path.resolve(process.cwd(), "assets/asset-catalog.json");
+console.log("🔥 Syncing Firebase Assets for Claude Remotion Turbo...");
 `
   }
 ];

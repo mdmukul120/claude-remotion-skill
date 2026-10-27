@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "RemotionAsset": {
+      "title": "RemotionAsset",
+      "description": "Video production asset such as audio SFX, background track, video overlay, or custom font",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "category": {
+          "type": "string",
+          "enum": ["sfx", "music", "overlay", "font", "graphic"]
+        },
+        "type": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "localPath": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "durationFrames": {
+          "type": "number"
+        },
+        "bpm": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "maxLength": 64
+        }
+      },
+      "required": ["id", "name", "category", "type", "url"]
+    }
+  },
+  "firestore": {
+    "/remotion_assets/{assetId}": {
+      "schema": "RemotionAsset",
+      "description": "Collection of Remotion video assets synced with Firebase Storage and Claude"
+    }
+  }
+}

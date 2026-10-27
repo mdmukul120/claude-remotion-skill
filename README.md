@@ -41,12 +41,52 @@ Copy the entire contents of `SKILL.md` directly into your Claude Project instruc
 
 ---
 
+## 🌐 Instant Vercel Deployment
+
+Deploy the entire Remotion Turbo Studio web dashboard & asset manager directly to Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mdmukul120/claude-remotion-skill)
+
+Or via Vercel CLI:
+```bash
+npm install -g vercel
+vercel --prod
+```
+
+---
+
+## 🔥 Firebase Cloud Assets Integration
+
+Audio sound effects, beat-synchronized background tracks, video overlays, and fonts are hosted on Firebase Storage and indexed in `assets/asset-catalog.json`.
+
+Claude can stream these assets directly in Remotion compositions using their Firebase Storage URLs:
+```tsx
+import { Audio } from "remotion";
+import catalog from "./assets/asset-catalog.json";
+
+// In your Remotion component:
+const sfx = catalog.assets.find(a => a.id === "sfx-woosh-fast");
+<Audio src={sfx.url} volume={0.8} />
+```
+
+To sync all cloud assets to your local `assets/` folder for offline GPU rendering:
+```bash
+npx tsx scripts/sync-firebase-assets.ts
+```
+
+---
+
 ## 🛠️ Repository Architecture
 
-- `SKILL.md`: Core agent constitution & 12 Golden Laws of Turbo Motion.
+- `SKILL.md`: Core agent constitution & 13 Golden Laws of Turbo Motion.
+- `vercel.json`: Vercel SPA routing and asset cache configuration.
+- `assets/asset-catalog.json`: Firebase Storage asset registry (SFX, Music, Overlays, Fonts).
 - `remotion.config.ts`: Optimal Chromium flags & zero-copy memory buffers.
-- `scripts/render-turbo.ts`: GPU-accelerated multi-thread render CLI.
+- `scripts/`:
+  - `render-turbo.ts`: GPU-accelerated multi-thread render CLI.
+  - `sync-firebase-assets.ts`: Firebase cloud asset synchronizer.
 - `references/`:
+  - `firebase-assets-manager.md`: Firebase Storage integration and streaming in Remotion.
   - `turbo-rendering-engine.md`: Chromium tuning, memory allocation, and GPU pipelines.
   - `motion-physics-v2.md`: Precision spring formulas and timing charts.
   - `cinematic-color-and-lighting.md`: Color grading matrices, grain, and lighting shaders.
@@ -57,3 +97,4 @@ Copy the entire contents of `SKILL.md` directly into your Claude Project instruc
 
 ## 📜 License
 MIT License.
+

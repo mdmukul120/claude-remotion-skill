@@ -5,6 +5,8 @@ import { SkillFileExplorer } from './components/SkillFileExplorer';
 import { TurboBenchmarkCalculator } from './components/TurboBenchmarkCalculator';
 import { GithubPushWizard } from './components/GithubPushWizard';
 import { TemplateShowcase } from './components/TemplateShowcase';
+import { FirebaseAssetManager } from './components/FirebaseAssetManager';
+import { VercelDeployGuide } from './components/VercelDeployGuide';
 import {
   Zap,
   Film,
@@ -19,7 +21,9 @@ import {
   Download,
   Terminal,
   Activity,
-  Maximize2
+  Maximize2,
+  Flame,
+  Globe
 } from 'lucide-react';
 import { generateSkillRepoZip, triggerDownload } from './utils/zipExporter';
 
@@ -140,12 +144,14 @@ export default function App() {
         </section>
 
         {/* Tab Selection Bar */}
-        <div className="flex items-center justify-center gap-1.5 p-1 bg-slate-900/80 rounded-xl border border-slate-800/80 max-w-2xl mx-auto overflow-x-auto w-full">
+        <div className="flex items-center justify-center gap-1.5 p-1 bg-slate-900/80 rounded-xl border border-slate-800/80 max-w-4xl mx-auto overflow-x-auto w-full">
           {[
             { id: 'preview', label: lang === 'bn' ? 'লাইভ ক্যানভাস' : 'Live Canvas', icon: Film },
+            { id: 'assets', label: lang === 'bn' ? 'ফায়ারবেস অ্যাসেট' : 'Firebase Assets', icon: Flame },
+            { id: 'vercel', label: lang === 'bn' ? 'Vercel ডিপ্লয়' : 'Vercel Deploy', icon: Globe },
             { id: 'files', label: lang === 'bn' ? 'স্কিল ফাইলসমূহ' : 'Skill Repo Files', icon: Terminal },
-            { id: 'benchmark', label: lang === 'bn' ? 'টার্বো স্পিড ক্যালকুলেটর' : 'Turbo Speed Benchmark', icon: Zap },
-            { id: 'templates', label: lang === 'bn' ? 'রেডিমেড টেমপ্লেট' : 'Templates', icon: Sparkles },
+            { id: 'benchmark', label: lang === 'bn' ? 'টার্বো স্পিড' : 'Turbo Speed', icon: Zap },
+            { id: 'templates', label: lang === 'bn' ? 'টেমপ্লেট' : 'Templates', icon: Sparkles },
             { id: 'github', label: lang === 'bn' ? 'গিটহাব ও ইনস্টল' : 'GitHub Push & Install', icon: Github },
           ].map((tab) => {
             const Icon = tab.icon;
@@ -297,6 +303,24 @@ export default function App() {
                         1-Click <code className="font-mono text-[11px] bg-slate-900 px-1 py-0.5 rounded">claude skill add [URL]</code> + Auto-triggers
                       </td>
                     </tr>
+                    <tr>
+                      <td className="py-3 px-4 font-semibold text-slate-200">
+                        {lang === 'bn' ? 'ফায়ারবেস ক্লাউড অ্যাসেট' : 'Firebase Cloud Assets'}
+                      </td>
+                      <td className="py-3 px-4 text-slate-400">Mock / Missing local files</td>
+                      <td className="py-3 px-4 font-bold text-amber-300">
+                        Firebase Storage streaming (`assets/asset-catalog.json`) + auto-sync
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-4 font-semibold text-slate-200">
+                        {lang === 'bn' ? 'Vercel লাইভ ডিপ্লয়মেন্ট' : 'Vercel Live Hosting'}
+                      </td>
+                      <td className="py-3 px-4 text-slate-400">Complex manual setup</td>
+                      <td className="py-3 px-4 font-bold text-cyan-300">
+                        1-Click Vercel Deploy (`vercel.json` SPA ready)
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -304,6 +328,8 @@ export default function App() {
           </div>
         )}
 
+        {activeTab === 'assets' && <FirebaseAssetManager lang={lang} />}
+        {activeTab === 'vercel' && <VercelDeployGuide lang={lang} />}
         {activeTab === 'files' && <SkillFileExplorer lang={lang} />}
         {activeTab === 'benchmark' && <TurboBenchmarkCalculator lang={lang} />}
         {activeTab === 'templates' && <TemplateShowcase lang={lang} />}
