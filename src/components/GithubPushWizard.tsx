@@ -18,30 +18,26 @@ interface GithubPushWizardProps {
 }
 
 export const GithubPushWizard: React.FC<GithubPushWizardProps> = ({ lang }) => {
-  const [repoUser, setRepoUser] = useState<string>('mdmukulahmed');
-  const [repoName, setRepoName] = useState<string>('claude-remotion-turbo-skill');
+  const [repoUser, setRepoUser] = useState<string>('mdmukul120');
+  const [repoName, setRepoName] = useState<string>('claude-remotion-skill');
   const [copiedStep, setCopiedStep] = useState<string | null>(null);
   const [isZipping, setIsZipping] = useState<boolean>(false);
 
   const fullRepoUrl = `https://github.com/${repoUser}/${repoName}`;
   const claudeInstallCmd = `claude skill add ${fullRepoUrl}`;
-  const rawSkillUrl = `https://raw.githubusercontent.com/${repoUser}/${repoName}/main/remotion-turbo/SKILL.md`;
 
-  const pushGitCommands = `# 1. Create and enter directory
-mkdir -p ${repoName} && cd ${repoName}
+  const pushGitCommands = `# আপনার লোকাল প্রজেক্ট বা ডাউনলোড করা ফোল্ডারে টার্মিনাল ওপেন করে রান করুন:
+git add SKILL.md README.md references scripts remotion.config.ts
+git commit -m "feat: Add Claude SKILL.md and Turbo Remotion references"
+git push origin main
 
-# 2. Extract downloaded ZIP or initialize git
+# অথবা একদম নতুন করে রিপোজিটরিতে পুশ করতে:
 git init
 git add .
 git commit -m "feat: Initial release of Claude Remotion Turbo Skill"
 git branch -M main
-
-# 3. Create repository on GitHub via GitHub CLI (or manual push)
-gh repo create ${repoUser}/${repoName} --public --source=. --push
-
-# Alternatively via standard git remote:
-# git remote add origin https://github.com/${repoUser}/${repoName}.git
-# git push -u origin main`;
+git remote add origin https://github.com/${repoUser}/${repoName}.git
+git push -u origin main --force`;
 
   const handleCopy = (text: string, stepId: string) => {
     navigator.clipboard.writeText(text);
@@ -98,6 +94,105 @@ gh repo create ${repoUser}/${repoName} --public --source=. --push
       </div>
 
       <div className="p-6 flex flex-col gap-6">
+        {/* Screenshot Diagnosis & Instant Fix Box */}
+        <div className="p-5 rounded-xl bg-amber-950/30 border border-amber-600/40 flex flex-col gap-3">
+          <div className="flex items-center justify-between gap-3 flex-wrap">
+            <div className="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              <span>
+                {lang === 'bn'
+                  ? 'ছবিতে দেখানো সমস্যার কারণ ও সরাসরি সমাধান'
+                  : 'Screenshot Error Analysis & Instant Solution'}
+              </span>
+            </div>
+            <span className="text-[11px] font-mono text-amber-200/80">
+              mdmukul120/claude-remotion-skill
+            </span>
+          </div>
+
+          <div className="text-xs text-slate-300 leading-relaxed">
+            {lang === 'bn' ? (
+              <>
+                <p className="mb-2">
+                  <strong className="text-amber-200">সমস্যার কারণ:</strong> Claude আপনার লিঙ্কে গিয়ে বলেছে:{' '}
+                  <code className="bg-slate-900/90 text-amber-300 px-1.5 py-0.5 rounded font-mono text-[11px]">
+                    "This repo isn't a Claude skill, so there's nothing to install. It has no SKILL.md and no README..."
+                  </code>{' '}
+                  কারণ আপনার গিটহাবে কেবল সাধারণ ওয়েব অ্যাপ কোড ছিল, কোনো <code className="text-white font-mono">SKILL.md</code> ছিল না।
+                </p>
+                <p>
+                  <strong className="text-emerald-400">সমাধান:</strong> আমরা এখন সরাসরি রুট লেভেলে <code className="text-emerald-300 font-mono">SKILL.md</code>, <code className="text-emerald-300 font-mono">README.md</code> এবং সব টার্বো রেন্ডার রেফারেন্স যোগ করেছি। আপনি নিচের যেকোনো একটি উপায়ে ব্যবহার করতে পারেন:
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="mb-2">
+                  <strong className="text-amber-200">Root Cause:</strong> Claude responded with:{' '}
+                  <code className="bg-slate-900/90 text-amber-300 px-1.5 py-0.5 rounded font-mono text-[11px]">
+                    "This repo isn't a Claude skill, so there's nothing to install. It has no SKILL.md and no README..."
+                  </code>{' '}
+                  because your GitHub repository only had web templates and lacked a root <code className="text-white font-mono">SKILL.md</code>.
+                </p>
+                <p>
+                  <strong className="text-emerald-400">Fix Applied:</strong> We have now placed <code className="text-emerald-300 font-mono">SKILL.md</code>, <code className="text-emerald-300 font-mono">README.md</code>, and all reference guides at the root.
+                </p>
+              </>
+            )}
+          </div>
+
+          <div className="mt-2 pt-3 border-t border-amber-900/40 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between gap-2">
+              <div>
+                <span className="text-xs font-bold text-white block mb-0.5">
+                  {lang === 'bn' ? 'পদ্ধতি ১: Claude অ্যাপে সরাসরি জিপ আপলোড' : 'Method 1: Direct Upload in Claude App'}
+                </span>
+                <span className="text-[11px] text-slate-400">
+                  {lang === 'bn'
+                    ? 'Claude এর নির্দেশনা: Settings → Capabilities → Skills এ গিয়ে জিপটি আপলোড করুন।'
+                    : 'As Claude suggested: Go to Settings → Capabilities → Skills and upload ZIP.'}
+                </span>
+              </div>
+              <button
+                onClick={handleDownloadZip}
+                disabled={isZipping}
+                className="self-start flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition-colors shadow-sm cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>{lang === 'bn' ? 'ক্লড স্কিল জিপ ডাউনলোড করুন' : 'Download Skill ZIP'}</span>
+              </button>
+            </div>
+
+            <div className="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex flex-col justify-between gap-2">
+              <div>
+                <span className="text-xs font-bold text-white block mb-0.5">
+                  {lang === 'bn' ? 'পদ্ধতি ২: আপনার গিটহাবে পুশ করুন' : 'Method 2: Update your GitHub Repo'}
+                </span>
+                <span className="text-[11px] text-slate-400">
+                  {lang === 'bn'
+                    ? 'নিচের গিট কমান্ড চালিয়ে mdmukul120/claude-remotion-skill এ SKILL.md পুশ করুন।'
+                    : 'Push the updated root SKILL.md to mdmukul120/claude-remotion-skill.'}
+                </span>
+              </div>
+              <button
+                onClick={() => handleCopy(pushGitCommands, 'git-push-top')}
+                className="self-start flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs transition-colors cursor-pointer"
+              >
+                {copiedStep === 'git-push-top' ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-emerald-400">Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-slate-400" />
+                    <span>{lang === 'bn' ? 'গিট পুশ কমান্ড কপি করুন' : 'Copy Git Push Commands'}</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Step 0: Customization Form */}
         <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-3">

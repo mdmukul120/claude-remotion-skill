@@ -1,16 +1,15 @@
 import JSZip from 'jszip';
 import { SKILL_FILES } from '../data/skillFiles';
 
-export async function generateSkillRepoZip(repoName: string = 'claude-remotion-turbo-skill'): Promise<Blob> {
+export async function generateSkillRepoZip(repoName?: string): Promise<Blob> {
   const zip = new JSZip();
-  const root = zip.folder(repoName) || zip;
-
+  // Put files directly at zip root so Claude Capabilities Skills upload works immediately
   for (const file of SKILL_FILES) {
-    root.file(file.path, file.content);
+    zip.file(file.path, file.content);
   }
 
   // Add a top-level .gitignore
-  root.file(
+  zip.file(
     '.gitignore',
     `node_modules/
 dist/

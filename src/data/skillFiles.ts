@@ -9,7 +9,7 @@ export interface SkillFile {
 
 export const SKILL_FILES: SkillFile[] = [
   {
-    path: 'remotion-turbo/SKILL.md',
+    path: 'SKILL.md',
     name: 'SKILL.md',
     category: 'core',
     description: 'The primary Claude Agent Skill definition file. Auto-activates in Claude Code & Claude Desktop.',
@@ -148,7 +148,7 @@ Before writing complex components, consult the specialized reference docs:
 `
   },
   {
-    path: 'remotion-turbo/references/turbo-rendering-engine.md',
+    path: 'references/turbo-rendering-engine.md',
     name: 'turbo-rendering-engine.md',
     category: 'reference',
     description: 'Hardware acceleration flags, concurrency tuning, and GPU headless pipelines for up to 4.8x faster render speeds.',
@@ -231,7 +231,7 @@ Config.setQuality(88);
 `
   },
   {
-    path: 'remotion-turbo/references/motion-physics-v2.md',
+    path: 'references/motion-physics-v2.md',
     name: 'motion-physics-v2.md',
     category: 'reference',
     description: 'Spring dynamics, mass-friction-tension math, inertia transitions, and 3D camera transforms.',
@@ -334,7 +334,7 @@ return (
 `
   },
   {
-    path: 'remotion-turbo/references/cinematic-color-and-lighting.md',
+    path: 'references/cinematic-color-and-lighting.md',
     name: 'cinematic-color-and-lighting.md',
     category: 'reference',
     description: 'Cinematic LUT matrices, film grain shaders, anamorphic lighting, and depth layering.',
@@ -399,7 +399,7 @@ export const FilmGrainOverlay = ({ opacity = 0.05 }: { opacity?: number }) => {
 `
   },
   {
-    path: 'remotion-turbo/references/kinetic-typography-and-sfx.md',
+    path: 'references/kinetic-typography-and-sfx.md',
     name: 'kinetic-typography-and-sfx.md',
     category: 'reference',
     description: 'Dynamic word-by-word karaoke captions, counter tickers, and beat-matched SFX triggers.',
@@ -510,7 +510,7 @@ export const AnimatedCounter = ({
 `
   },
   {
-    path: 'remotion-turbo/references/multi-aspect-composition.md',
+    path: 'references/multi-aspect-composition.md',
     name: 'multi-aspect-composition.md',
     category: 'reference',
     description: 'Dynamic composition system for 16:9, 9:16 vertical shorts, and 1:1 feeds with auto-reflow.',
@@ -561,7 +561,7 @@ export const ASPECT_RATIOS = {
 `
   },
   {
-    path: 'remotion-turbo/scripts/render-turbo.ts',
+    path: 'scripts/render-turbo.ts',
     name: 'render-turbo.ts',
     category: 'script',
     description: 'Battle-tested CLI runner with auto-core detection, GPU flag injection, and live progress reporting.',
@@ -629,7 +629,7 @@ runTurboRender().catch((err) => {
 `
   },
   {
-    path: 'remotion-turbo/remotion.config.ts',
+    path: 'remotion.config.ts',
     name: 'remotion.config.ts',
     category: 'config',
     description: 'Production Remotion configuration for hardware acceleration and memory tuning.',
@@ -662,7 +662,7 @@ Config.setQuality(88);
 `
   },
   {
-    path: 'remotion-turbo/package.json',
+    path: 'package.json',
     name: 'package.json',
     category: 'config',
     description: 'Standard Remotion Turbo package dependencies and scripts.',
@@ -694,7 +694,7 @@ Config.setQuality(88);
 `
   },
   {
-    path: 'remotion-turbo/README.md',
+    path: 'README.md',
     name: 'README.md',
     category: 'core',
     description: 'Comprehensive GitHub documentation with Claude Code install commands and architecture overview.',
@@ -722,7 +722,7 @@ git clone https://github.com/YOUR_USERNAME/claude-remotion-turbo-skill.git .clau
 \`\`\`
 
 ### Option 3: Claude Desktop / Custom Instructions
-Copy the entire contents of \`remotion-turbo/SKILL.md\` into your Claude Project instructions or system prompt!
+Copy the entire contents of \`SKILL.md\` into your Claude Project instructions or system prompt!
 
 ---
 
@@ -741,10 +741,10 @@ Copy the entire contents of \`remotion-turbo/SKILL.md\` into your Claude Project
 
 ## 🛠️ Included Turbo Scripts & Configs
 
-- \`remotion-turbo/SKILL.md\`: Core agent constitution & 12 Golden Laws.
-- \`remotion-turbo/scripts/render-turbo.ts\`: GPU-accelerated multi-thread render CLI.
-- \`remotion-turbo/remotion.config.ts\`: Optimal Chromium flags & zero-copy memory buffers.
-- \`remotion-turbo/references/\`: Complete formulas for motion physics, LUT grading, typography, and aspect ratios.
+- \`SKILL.md\`: Core agent constitution & 12 Golden Laws.
+- \`scripts/render-turbo.ts\`: GPU-accelerated multi-thread render CLI.
+- \`remotion.config.ts\`: Optimal Chromium flags & zero-copy memory buffers.
+- \`references/\`: Complete formulas for motion physics, LUT grading, typography, and aspect ratios.
 
 ---
 
